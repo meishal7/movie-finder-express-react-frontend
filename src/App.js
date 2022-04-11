@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { Fragment, useEffect, useState } from "react";
+import { GlobalStyle } from "./style/globalStyles";
+import Search from "./components/Search";
+import Movie from "./components/Movie";
 
 function App() {
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const response = await fetch("http://localhost:8080/?id=titanic");
+  //     const data = await response.json();
+  //     console.log(data);
+  //   }
+  //   fetchData();
+  // }, []);
+  const [movie, setMovie] = useState();
+
+  const searchMovieHandler = (data) => {
+    console.log(data);
+    setMovie(data);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <GlobalStyle />
+      <Search onSubmit={searchMovieHandler} />
+      <Movie data={movie} />
+    </Fragment>
   );
 }
 
